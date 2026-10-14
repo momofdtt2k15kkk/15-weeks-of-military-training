@@ -18,7 +18,7 @@ jobs:
   chay-notebook:
     runs-on: ubuntu-latest
     env:
-      AUTOGRADE: ${{ github.repository != 'dongthethang2k15kkk/15-weeks-of-military-training' && '1' || '0' }}
+      AUTOGRADE: ${{ github.repository != 'momofdtt2k15kkk/15-weeks-of-military-training' && '1' || '0' }}
     steps:
       - uses: actions/checkout@v4
 

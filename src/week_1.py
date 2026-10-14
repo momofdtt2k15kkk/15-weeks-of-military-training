@@ -11,11 +11,11 @@
 # ---
 
 # %% [markdown]
-# [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/dongthethang2k15kkk/15-weeks-of-military-training/blob/main/week1/week_1.ipynb)
+# [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/momofdtt2k15kkk/15-weeks-of-military-training/blob/main/week1/week_1.ipynb)
 #
 # # Tuần 1 — Nền tảng & Cú pháp cơ bản
 #
-# ![Kết quả cuối tuần 1](https://raw.githubusercontent.com/dongthethang2k15kkk/15-weeks-of-military-training/main/assets/ket_qua_tuan1.png)
+# ![Kết quả cuối tuần 1](https://raw.githubusercontent.com/momofdtt2k15kkk/15-weeks-of-military-training/main/assets/ket_qua_tuan1.png)
 #
 # Cuối tuần bạn sẽ tự vẽ ra hình này từ dữ liệu của một chuyến xe.
 #
@@ -37,7 +37,7 @@ import os
 import sys
 import urllib.request
 
-REPO_RAW = "https://raw.githubusercontent.com/dongthethang2k15kkk/15-weeks-of-military-training/main"
+REPO_RAW = "https://raw.githubusercontent.com/momofdtt2k15kkk/15-weeks-of-military-training/main"
 
 # File của tuần này. Chỉ tải file chưa có trên máy.
 FILE_TESTS = ("runner.py", "test_week1.py", "tien_ich_du_lieu.py")
@@ -1195,7 +1195,7 @@ print(f"\nTONG KET TUAN 1: {sum(ket_qua)}/{len(ket_qua)} bai dat.")
 # Để nộp bài:
 #
 # 1. Tạo repo của bạn từ template tại
-#    https://github.com/dongthethang2k15kkk/15-weeks-of-military-training/generate
+#    https://github.com/momofdtt2k15kkk/15-weeks-of-military-training/generate
 #    (chỉ làm một lần, nên chọn Private).
 # 2. Ở bản trong Drive, vào `File > Save a copy in GitHub` (dòng này chỉ có trên bản
 #    trong Drive), chọn repo của bạn, đường dẫn `week1/week_1.ipynb`, ghi commit

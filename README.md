@@ -4,7 +4,7 @@ Khoá Python và AI for Automobile
 
 | Tuần | Chủ đề | Mở trên Colab |
 |---|---|---|
-| 1 | Nền tảng, cú pháp cơ bản, vòng lặp và đọc file log cảm biến | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/dongthethang2k15kkk/15-weeks-of-military-training/blob/main/week1/week_1.ipynb) |
+| 1 | Nền tảng, cú pháp cơ bản, vòng lặp và đọc file log cảm biến | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/momofdtt2k15kkk/15-weeks-of-military-training/blob/main/week1/week_1.ipynb) |
 
 Các tuần sau được thêm vào bảng khi đến tuần đó.
 
@@ -19,7 +19,7 @@ Mỗi tuần chỉ cần mở một notebook. Học tuần mới không phải t
 
 ## Nộp bài
 
-1. Tạo repo của bạn từ template, chỉ làm một lần: bấm [Use this template](https://github.com/dongthethang2k15kkk/15-weeks-of-military-training/generate), đặt tên repo, chọn **Private**.
+1. Tạo repo của bạn từ template, chỉ làm một lần: bấm [Use this template](https://github.com/momofdtt2k15kkk/15-weeks-of-military-training/generate), đặt tên repo, chọn **Private**.
 2. Làm bài trên bản trong Drive của bạn. Khi xong, vào `File > Save a copy in GitHub` (dòng này chỉ có trên bản trong Drive, không có trên bản mở thẳng từ link), chọn repo của bạn, đường dẫn đúng thư mục của tuần (ví dụ `week1/week_1.ipynb`), ghi commit message dạng `week1: hoan thanh bai tap`. Lần lưu đầu Colab hỏi quyền truy cập GitHub, chọn cho phép.
 3. Mở tab **Actions** của repo. GitHub chạy lại notebook của bạn và chấm: dấu xanh là mọi bài đạt, dấu đỏ là còn bài sai, bấm vào để xem bài nào.
 
