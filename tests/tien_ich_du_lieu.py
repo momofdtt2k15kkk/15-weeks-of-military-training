@@ -2,6 +2,8 @@
 
   - doc_chuyen_xe(): đọc các file trong data/, đồng bộ về 1 Hz.
   - ve_chuyen_xe(ham_quyet_dinh): vẽ kết quả của một hàm quyết định lên chuyến xe.
+  - nmea_sang_do, khoang_cach_hai_diem_m: đổi toạ độ NMEA, đo khoảng cách hai điểm GPS.
+  - ve_phan_tich_chuyen_xe(...): vẽ tốc độ đã làm mượt, các giây có vật cản gần và số giây theo mã fix GPS.
 """
 
 from __future__ import annotations
@@ -125,6 +127,64 @@ def ve_chuyen_xe(ham_quyet_dinh) -> None:
     hinh_phai.set_title("Quỹ đạo GPS theo lệnh")
     hinh_phai.legend(handles=[Patch(color=m, label=ten) for ten, m in MAU_THEO_LENH.items()],
                      loc="lower left", fontsize=8)
+
+    fig.tight_layout()
+    plt.show()
+
+
+TEN_MA_FIX = {0: "Không fix", 1: "GPS", 2: "DGPS", 4: "RTK fixed", 5: "RTK float"}
+
+
+def nmea_sang_do(chuoi: str, huong: str) -> float | None:
+    """Đổi toạ độ NMEA dạng ddmm.mmmmm hoặc dddmm.mmmmm sang độ thập phân, hướng S và W là số âm."""
+    if chuoi == "":
+        return None
+    do = _nmea_sang_do(chuoi)
+    return -do if huong in ("S", "W") else do
+
+
+def khoang_cach_hai_diem_m(diem_a, diem_b) -> float:
+    """Khoảng cách (mét) giữa hai điểm (t, vi_do, kinh_do), xấp xỉ mặt phẳng, đủ chính xác trong vài km."""
+    _, vi_do_a, kinh_do_a = diem_a
+    _, vi_do_b, kinh_do_b = diem_b
+    bac = (vi_do_b - vi_do_a) * 111320.0
+    dong = (kinh_do_b - kinh_do_a) * 111320.0 * math.cos(math.radians(vi_do_a))
+    return math.hypot(dong, bac)
+
+
+def ve_phan_tich_chuyen_xe(toc_do_theo_giay, toc_do_muot, giay_vat_can_gan, so_giay_theo_fix) -> None:
+    """Vẽ hai hình cạnh nhau từ các list và dict học viên vừa tính.
+
+    Trái: tốc độ từng giây (mờ), tốc độ đã làm mượt (đậm), nền đỏ ở các giây có vật cản gần.
+    Phải: số giây của từng mã fix GPS.
+    toc_do_muot ngắn hơn toc_do_theo_giay k - 1 phần tử, mỗi giá trị đặt ở giây cuối của cửa sổ.
+    """
+    import matplotlib.pyplot as plt
+
+    if (not toc_do_theo_giay or toc_do_muot is None or giay_vat_can_gan is None
+            or so_giay_theo_fix is None):
+        print("Làm xong các biến của bài rồi chạy lại ô này để xem hình.")
+        return
+
+    fig, (hinh_trai, hinh_phai) = plt.subplots(1, 2, figsize=(14, 5))
+
+    so_mau_cua_so = len(toc_do_theo_giay) - len(toc_do_muot) + 1
+    hinh_trai.plot(range(len(toc_do_theo_giay)), toc_do_theo_giay, color="tab:blue", alpha=0.35,
+                   label="Tốc độ từng giây")
+    hinh_trai.plot(range(so_mau_cua_so - 1, len(toc_do_theo_giay)), toc_do_muot, color="tab:blue",
+                   linewidth=2, label=f"Trung bình {so_mau_cua_so} giây gần nhất")
+    for t in giay_vat_can_gan:
+        hinh_trai.axvspan(t, t + 1, color="red", alpha=0.25, linewidth=0)
+    hinh_trai.set_xlabel("Thời gian (s)")
+    hinh_trai.set_ylabel("Tốc độ (km/h)")
+    hinh_trai.set_title("Tốc độ và các giây có vật cản trong 5 m (nền đỏ)")
+    hinh_trai.legend(loc="upper left", fontsize=8)
+
+    ma_fix = sorted(so_giay_theo_fix)
+    hinh_phai.bar([TEN_MA_FIX.get(m, str(m)) for m in ma_fix], [so_giay_theo_fix[m] for m in ma_fix],
+                  color="tab:green")
+    hinh_phai.set_ylabel("Số giây")
+    hinh_phai.set_title("Số giây theo mã fix GPS")
 
     fig.tight_layout()
     plt.show()

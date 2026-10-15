@@ -99,6 +99,26 @@ Tần số 50 Hz, 9001 dòng dữ liệu. Xe chạy về phía trước theo tr�
 
 Nhiễu: σ ≈ 0.05 m/s² với gia tốc, σ ≈ 0.1 độ/giây với vận tốc góc.
 
+## `ma_loi.csv` — nhật ký mã lỗi chẩn đoán (DTC)
+
+Ghi lại mỗi lần ECU báo một mã lỗi chẩn đoán qua OBD-II, 15 dòng dữ liệu. Một mã có thể được báo nhiều lần.
+
+| Cột | Đơn vị | Kiểu | Ý nghĩa |
+|---|---|---|---|
+| `thoi_gian_s` | giây | số thực, 2 chữ số thập phân | thời điểm ECU báo mã lỗi |
+| `ma_loi` | | chuỗi | mã lỗi chẩn đoán |
+
+Bốn mã trong chuyến xe, đều khớp với sự kiện ở bảng đầu trang:
+
+| Mã | Ý nghĩa | Số lần | Thời điểm (giây) |
+|---|---|---|---|
+| `P0113` | tín hiệu cảm biến nhiệt độ khí nạp quá cao | 4 | 3.40, 21.80, 47.10, 83.60 |
+| `C0035` | mạch cảm biến tốc độ bánh xe trước trái lỗi | 3 | 113.20, 113.90, 114.60 |
+| `U0121` | mất liên lạc với module ABS | 2 | 113.40, 114.20 |
+| `P0562` | điện áp hệ thống thấp | 6 | 165.30 đến 177.80, cách nhau 2.5 giây |
+
+`C0035` và `U0121` xuất hiện ngay sau lần phanh gấp lúc 113.1 giây. `P0562` bắt đầu lúc 165.30 giây, ngay sau khi `muc_pin_pct` xuống dưới 15. Sinh bằng `tools/tao_du_lieu_tuan2.py`, riêng với bốn file còn lại.
+
 ## Tổng dung lượng
 
-Khoảng 450 KB cho cả bốn file.
+Khoảng 450 KB cho cả năm file.

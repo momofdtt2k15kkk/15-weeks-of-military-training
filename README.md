@@ -5,6 +5,7 @@ Khoá Python và AI for Automobile
 | Tuần | Chủ đề | Mở trên Colab |
 |---|---|---|
 | 1 | Nền tảng, cú pháp cơ bản, vòng lặp và đọc file log cảm biến | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/momofdtt2k15kkk/15-weeks-of-military-training/blob/main/week1/week_1.ipynb) |
+| 2 | List, tuple, tham số mặc định, chuỗi, dict và set, phân tích dữ liệu cả chuyến xe | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/momofdtt2k15kkk/15-weeks-of-military-training/blob/main/week2/week_2.ipynb) |
 
 Các tuần sau được thêm vào bảng khi đến tuần đó.
 
