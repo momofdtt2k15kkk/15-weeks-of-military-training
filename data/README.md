@@ -119,6 +119,28 @@ Bốn mã trong chuyến xe, đều khớp với sự kiện ở bảng đầu t
 
 `C0035` và `U0121` xuất hiện ngay sau lần phanh gấp lúc 113.1 giây. `P0562` bắt đầu lúc 165.30 giây, ngay sau khi `muc_pin_pct` xuống dưới 15. Sinh bằng `tools/tao_du_lieu_tuan2.py`, riêng với bốn file còn lại.
 
+## `nhat_ky_tho.csv` — log thô gộp, có dòng hỏng
+
+Log gộp tốc độ, khoảng cách phía trước và gia tốc dọc của cả chuyến, 10 mẫu mỗi giây (giây 0.00 đến 180.00). Giá trị lấy từ `obd.csv`, `khoang_cach_truoc.csv` và `imu.csv`, nên khớp mọi sự kiện ở bảng đầu trang. Dùng để tập đọc file có lỗi mà chương trình không dừng.
+
+| Cột | Đơn vị | Kiểu | Ý nghĩa |
+|---|---|---|---|
+| `thoi_gian_s` | giây | số thực, 2 chữ số thập phân | thời điểm ghi |
+| `toc_do_kmh` | km/h | số nguyên | tốc độ, lấy từ `obd.csv` của giây đó |
+| `khoang_cach_m` | m | số thực, 2 chữ số thập phân | khoảng cách phía trước, lấy từ `khoang_cach_truoc.csv`, mẫu LiDAR lỗi thay bằng mẫu hợp lệ gần nhất phía trước |
+| `ax` | m/s² | số thực, 3 chữ số thập phân | gia tốc dọc, lấy từ `imu.csv` |
+
+Các dòng hỏng có chủ đích:
+
+| Kiểu hỏng | Số dòng | Ví dụ |
+|---|---|---|
+| một ô ghi `N/A`, `ERR` hoặc để trống | 30 | `1.00,0,12.00,ERR` |
+| dòng bị cắt ngang (mất điện), còn 1 đến 3 cột | 15 | `2.80` |
+| đọc được số nhưng vô lý: khoảng cách `-3.00`, `0.00`, `15.50` m hoặc tốc độ `900`, `-5` km/h | 20 | `16.10,2,-3.00,0.552` |
+| dòng tiêu đề lặp giữa file (log khởi động lại) | 2 | `thoi_gian_s,toc_do_kmh,khoang_cach_m,ax` |
+
+Còn lại 1736 dòng hợp lệ. Sinh bằng `tools/tao_du_lieu_tuan3.py`, seed cố định, riêng với các file khác.
+
 ## Tổng dung lượng
 
-Khoảng 450 KB cho cả năm file.
+Khoảng 490 KB cho cả sáu file.

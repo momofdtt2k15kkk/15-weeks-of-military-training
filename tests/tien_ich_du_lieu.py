@@ -4,6 +4,7 @@
   - ve_chuyen_xe(ham_quyet_dinh): vẽ kết quả của một hàm quyết định lên chuyến xe.
   - nmea_sang_do, khoang_cach_hai_diem_m: đổi toạ độ NMEA, đo khoảng cách hai điểm GPS.
   - ve_phan_tich_chuyen_xe(...): vẽ tốc độ đã làm mượt, các giây có vật cản gần và số giây theo mã fix GPS.
+  - ve_so_du_hang_muc(cac_hang_muc): vẽ số dư của các hạng mục ngân sách (dự án tuần 3).
 """
 
 from __future__ import annotations
@@ -186,5 +187,27 @@ def ve_phan_tich_chuyen_xe(toc_do_theo_giay, toc_do_muot, giay_vat_can_gan, so_g
     hinh_phai.set_ylabel("Số giây")
     hinh_phai.set_title("Số giây theo mã fix GPS")
 
+    fig.tight_layout()
+    plt.show()
+
+
+def ve_so_du_hang_muc(cac_hang_muc) -> None:
+    """Vẽ cột số dư của từng hạng mục. Mỗi phần tử cần có thuộc tính `ten` và phương thức `so_du()`."""
+    import matplotlib.pyplot as plt
+
+    try:
+        ten = [hm.ten for hm in cac_hang_muc]
+        so_du = [hm.so_du() for hm in cac_hang_muc]
+    except Exception:  # noqa: BLE001 - class của học viên chưa xong thì chỉ nhắc
+        so_du = [None]
+    if any(not isinstance(s, (int, float)) for s in so_du):
+        print("Làm xong class HangMuc rồi chạy lại ô này để xem hình.")
+        return
+
+    fig, truc = plt.subplots(figsize=(7, 4))
+    cot = truc.bar(ten, so_du, color="tab:blue")
+    truc.bar_label(cot, labels=[f"{s:,.0f}" for s in so_du])
+    truc.set_ylabel("Số dư (VND)")
+    truc.set_title("Số dư các hạng mục ngân sách")
     fig.tight_layout()
     plt.show()

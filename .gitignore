@@ -9,3 +9,8 @@ tools/loi_giai_tuan*.py
 
 # Tài liệu kế hoạch nội bộ, học viên đọc được repo public nên không đẩy lên
 docs/
+
+# File học viên và ô ví dụ tuần 3 ghi ra khi chạy notebook
+nhat_ky_sach.csv
+vi_du_bao_cao.txt
+vi_du_sach.csv
